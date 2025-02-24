@@ -29,6 +29,10 @@ public class Employee {
         this.department = department;
         this.salary = salary;
     }
+    public Employee(String name, double salary){
+        this.name = name ;
+        this.salary = salary;
+    }
 
     // Getters and Setters
     public Long getId() { return id; }
