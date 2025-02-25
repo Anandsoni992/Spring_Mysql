@@ -4,6 +4,7 @@ import com.bridgelabz.Spring_mysql.DTO.EmployeePayrollDTO;
 import com.bridgelabz.Spring_mysql.model.Employee;
 import com.bridgelabz.Spring_mysql.repository.EmployeeRepository;
 import com.bridgelabz.Spring_mysql.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/dto/add")
-    public EmployeePayrollDTO createEmployee(@RequestBody EmployeePayrollDTO employeeDTO) {
+    public EmployeePayrollDTO createEmployee(@Valid @RequestBody EmployeePayrollDTO employeeDTO) {
         Employee employee = new Employee(employeeDTO.getName(), employeeDTO.getSalary());
         employeeRepository.save(employee);
         return employeeDTO;
@@ -79,7 +80,7 @@ public class EmployeeController {
 
     /*** ---- UPDATE EMPLOYEE USING DTO ---- ***/
     @PutMapping("/dto/update/{id}")
-    public EmployeePayrollDTO updateEmployeeDTO(@PathVariable Long id, @RequestBody EmployeePayrollDTO updatedDTO) {
+    public EmployeePayrollDTO updateEmployeeDTO(@PathVariable Long id,@Valid @RequestBody EmployeePayrollDTO updatedDTO) {
         return employeeRepository.findById(id)
                 .map(employee -> {
                     employee.setName(updatedDTO.getName());
