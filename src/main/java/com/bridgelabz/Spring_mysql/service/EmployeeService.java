@@ -29,11 +29,18 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Long id, Employee updatedEmployee) {
-        if (repository.existsById(id)) {
-            updatedEmployee.setId(id);
-            return repository.save(updatedEmployee);
-        }
-        return null;
+        return repository.findById(id)
+   .map(employee -> {
+            employee.setName(updatedEmployee.getName());
+            employee.setSalary(updatedEmployee.getSalary());
+            employee.setGender(updatedEmployee.getGender());
+            employee.setStartDate(updatedEmployee.getStartDate());
+            employee.setNote(updatedEmployee.getNote());
+            employee.setProfilePic(updatedEmployee.getProfilePic());
+            employee.setDepartment(updatedEmployee.getDepartment());
+            return repository.save(employee);
+        })
+                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
     }
 
     public void deleteEmployee(Long id) {
