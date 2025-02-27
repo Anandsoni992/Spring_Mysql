@@ -76,6 +76,9 @@ public class EmployeeService {
         }
         return null;
     }
+    public List<Employee> getEmployeesBySalesDepartment() {
+        return repository.findEmployeesBySalesDepartment();
+    }
 
     public boolean deleteEmployeeList(int id) {
         return employees.removeIf(emp -> emp.getId() == id);
