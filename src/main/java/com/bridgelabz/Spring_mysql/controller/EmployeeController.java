@@ -88,6 +88,11 @@ public class EmployeeController {
                 .map(employee -> {
                     employee.setName(updatedDTO.getName());
                     employee.setSalary(updatedDTO.getSalary());
+                    employee.setGender(updatedDTO.getGender());
+                    employee.setStartDate(updatedDTO.getStartDate());
+                    employee.setNote(updatedDTO.getNote());
+                    employee.setProfilePic(updatedDTO.getProfilePic());
+                    employee.setDepartment(updatedDTO.getDepartment());
                     employeeRepository.save(employee);
                     return updatedDTO;
                 })

@@ -1,5 +1,6 @@
 package com.bridgelabz.Spring_mysql.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,13 +28,20 @@ public class EmployeePayrollDTO {
     private String gender;
     public EmployeePayrollDTO() {}
 
-    @NotNull(message = "Start date cannot be null")
+    @JsonFormat(pattern = "dd MMM yyyy")
+    @PastOrPresent(message = "Start date must be a past or present date")
     private LocalDate startDate;
 
     @NotEmpty(message = "Department list cannot be empty")
     private List<String> department;
 
+    @NotBlank(message = "Note cannot be blank")
     private String note;
+
+    @NotBlank(message = "Profile picture URL cannot be blank")
+    private String profilePic;
+
+
 
     public EmployeePayrollDTO(String name, double salary, String gender, LocalDate startDate, String note, String profilePic, List<String> department) {
         this.name = name ;
@@ -85,7 +93,6 @@ public class EmployeePayrollDTO {
         this.profilePic = profilePic;
     }
 
-    private String profilePic;
 
     public EmployeePayrollDTO(String name, Double salary) {
         this.name = name;
